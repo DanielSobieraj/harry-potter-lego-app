@@ -12,14 +12,17 @@ type Props = {
     | 'lowercase'
     | 'initial'
     | 'inherit';
+  disabled?: boolean;
 };
 
-const CustomButton: FC<Props> = ({ children, textTransform, to }) => {
+const CustomButton: FC<Props> = ({ children, textTransform, to, disabled }) => {
   return (
     <StyledWrapper>
-      <StyledLink to={to}>
-        <StyledButton textTransform={textTransform}>{children}</StyledButton>
-      </StyledLink>
+      <Link to={to}>
+        <StyledButton disabled={disabled} textTransform={textTransform}>
+          {children}
+        </StyledButton>
+      </Link>
     </StyledWrapper>
   );
 };
@@ -38,24 +41,14 @@ const StyledButton = styled.button<{ textTransform: Props['textTransform'] }>`
   padding: 10px 75px 5px;
   border-radius: 25px;
   border: 1px solid transparent;
-  background-color: var(--primary);
+  background-color: ${(props) => (props.disabled ? 'grey' : 'var(--primary)')};
+
   color: var(--white);
   transition: background-color 0.2s ease-in-out;
 
   &:hover {
-    cursor: pointer;
-    background-color: var(--primary-hover);
-  }
-`;
-
-const StyledLink = styled(Link)`
-  text-decoration: none;
-
-  &:focus,
-  &:hover,
-  &:visited,
-  &:link,
-  &:active {
-    text-decoration: none;
+    cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
+    background-color: ${(props) =>
+      props.disabled ? 'grey' : 'var(--primary-hover)'};
   }
 `;

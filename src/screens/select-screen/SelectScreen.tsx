@@ -19,6 +19,7 @@ const SelectScreen = () => {
   const [parts, setParts] = useState<string[]>([]);
   const [partsArray, setPartsArray] = useState<any[]>([]);
   const [selectedCard, setSelectedCard] = useState<number>(-1);
+  const [isDisabled, setIsDisabled] = useState<boolean>(true);
 
   useEffect(() => {
     const getMinifs = async () => {
@@ -49,8 +50,6 @@ const SelectScreen = () => {
   //   getParts()
   // }, [parts])
 
-  // console.log(partsArray)
-
   return (
     <StyledWrapper>
       <StyledSliderWrapper>
@@ -62,15 +61,22 @@ const SelectScreen = () => {
                   image={set_img_url}
                   title={name}
                   isActive={i === selectedCard}
-                  details={minifigs}
-                  onClick={() => setSelectedCard(i)}
+                  details={set_num}
+                  onClick={() => {
+                    setSelectedCard(i);
+                    setIsDisabled(false);
+                  }}
                 />
               </SplideSlide>
             ))}
           </Splide>
         )}
       </StyledSliderWrapper>
-      <CustomButton to="/summary" textTransform="uppercase">
+      <CustomButton
+        disabled={isDisabled}
+        to="/summary"
+        textTransform="uppercase"
+      >
         proceed to shipment
       </CustomButton>
     </StyledWrapper>

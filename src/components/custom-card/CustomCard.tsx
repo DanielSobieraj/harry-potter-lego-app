@@ -1,6 +1,5 @@
 import { FC, useState } from 'react';
 import styled from 'styled-components';
-import { Result } from '../../screens/select-screen/SelectScreen';
 import { MEDIA_MIN_TABLET } from '../../utils/constants/resolutions';
 import CustomLoader from '../custom-loader/CustomLoader';
 import DetailsModal from '../details-modal/DetailsModal';
@@ -9,7 +8,7 @@ type Props = {
   title: string;
   image: string;
   isActive: boolean;
-  details: Result[];
+  details: string;
   onClick: () => void;
 };
 

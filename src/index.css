@@ -35,6 +35,10 @@ body {
   align-items: center;
 }
 
+a {
+  text-decoration: none;
+}
+
 #splide01 {
   position: static;
   width: 100%;
