@@ -18,4 +18,5 @@ const StyledWrapper = styled.div`
   justify-content: space-around;
   flex-wrap: wrap;
   color: var(--white);
+  margin: 10px;
 `;

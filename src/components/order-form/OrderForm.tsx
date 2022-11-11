@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 interface IFormInput {
   firstName: string;
-  secondName: string;
-  phone: number;
+  surname: string;
+  tel: number;
   email: string;
   birthday: Date;
   address: string;
@@ -22,41 +22,41 @@ const OrderForm = () => {
       <StyledWrapper>
         <StyledInputWrapper>
           <label>First Name</label>
-          <StyledInput {...register('firstName')} />
+          <StyledInput required {...register('firstName')} />
         </StyledInputWrapper>
         <StyledInputWrapper>
-          <label>Second Name</label>
-          <StyledInput {...register('secondName')} />
+          <label>Surname</label>
+          <StyledInput required {...register('surname')} />
         </StyledInputWrapper>
       </StyledWrapper>
       <StyledInputWrapper>
         <label>Phone number</label>
-        <StyledInput {...register('phone')} />
+        <StyledInput required type="tel" {...register('tel')} />
       </StyledInputWrapper>
       <StyledInputWrapper>
         <label>Email</label>
-        <StyledInput {...register('email')} />
+        <StyledInput required type="email" {...register('email')} />
       </StyledInputWrapper>
       <StyledInputWrapper>
         <label>Date of birth</label>
-        <StyledInput {...register('birthday')} />
+        <StyledInput required type="date" {...register('birthday')} />
       </StyledInputWrapper>
       <StyledInputWrapper>
         <label>Address</label>
-        <StyledInput {...register('address')} />
+        <StyledInput required {...register('address')} />
       </StyledInputWrapper>
       <StyledInputWrapper>
         <label>City</label>
-        <StyledInput {...register('city')} />
+        <StyledInput required {...register('city')} />
       </StyledInputWrapper>
       <StyledWrapper>
         <StyledInputWrapper>
           <label>State</label>
-          <StyledInput {...register('state')} />
+          <StyledInput required {...register('state')} />
         </StyledInputWrapper>
         <StyledInputWrapper>
           <label>Zip Code</label>
-          <StyledInput {...register('zipcode')} />
+          <StyledInput required {...register('zipcode')} />
         </StyledInputWrapper>
       </StyledWrapper>
     </form>
@@ -68,10 +68,16 @@ export default OrderForm;
 const StyledWrapper = styled.div`
   display: flex;
   gap: 15px;
+  margin: 10px 0;
 `;
 
 const StyledInputWrapper = styled.div`
   width: 100%;
+  margin: 10px 0;
+
+  label {
+    padding-left: 10px;
+  }
 `;
 
 const StyledInput = styled.input`
@@ -79,4 +85,12 @@ const StyledInput = styled.input`
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
+  border-radius: 25px;
+  transition: outline 0.2s ease-in-out;
+  border-color: transparent;
+
+  &:focus-visible {
+    outline-color: var(--primary);
+    border-color: transparent;
+  }
 `;

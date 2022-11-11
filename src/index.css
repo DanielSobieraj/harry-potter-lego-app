@@ -3,7 +3,7 @@
   --primary-hover: #004676;
   --secondary: #ea8029;
   --secondary-hover: #7d3f0c;
-  --white: #fffdfa;
+  --white: white;
   --black: #070606;
 }
 
@@ -37,4 +37,5 @@ body {
 
 #splide01 {
   position: static;
+  width: 100%;
 }
