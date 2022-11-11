@@ -41,13 +41,15 @@ export default CustomCard;
 const StyledWrapper = styled.div<{ isActive: boolean }>`
   background: var(--white);
   border-radius: 15px;
-  margin: 10px;
+  margin: 10px auto;
   padding: 10px;
   transition: box-shadow 0.2s ease-in-out;
+  max-width: 50%;
   box-shadow: ${(props) =>
     props.isActive ? '0px 0px 20px 3px var(--secondary)' : ''};
 
   @media (min-width: 768px) {
+    max-width: fit-content;
     padding: 25px;
     margin: 25px;
   }
@@ -66,8 +68,12 @@ const StyledImageWrapper = styled.div`
   background: var(--white);
 
   img {
-    max-width: 75%;
+    max-width: 50%;
     height: auto;
+
+    @media (min-width: 768px) {
+      max-width: 75%;
+    }
   }
 `;
 
