@@ -1,7 +1,21 @@
-import React from 'react'
+import styled from 'styled-components';
+import OrderForm from '../../components/order-form/OrderForm';
+import OrderSummary from '../../components/order-summary/OrderSummary';
 
 const SummaryScreen = () => {
-  return <div style={{ color: 'white' }}>SummaryScreen</div>
-}
+  return (
+    <StyledWrapper>
+      <OrderForm />
+      <OrderSummary />
+    </StyledWrapper>
+  );
+};
 
-export default SummaryScreen
+export default SummaryScreen;
+
+const StyledWrapper = styled.div`
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  color: var(--white);
+`;

@@ -1,6 +1,7 @@
 import { FC, useState } from 'react';
 import styled from 'styled-components';
 import { Result } from '../../screens/select-screen/SelectScreen';
+import { MEDIA_MIN_TABLET } from '../../utils/constants/resolutions';
 import CustomLoader from '../custom-loader/CustomLoader';
 import DetailsModal from '../details-modal/DetailsModal';
 
@@ -41,17 +42,16 @@ export default CustomCard;
 const StyledWrapper = styled.div<{ isActive: boolean }>`
   background: var(--white);
   border-radius: 15px;
-  margin: 10px auto;
+  margin: 20px auto;
   padding: 10px;
   transition: box-shadow 0.2s ease-in-out;
-  max-width: 50%;
+  max-width: 75%;
   box-shadow: ${(props) =>
     props.isActive ? '0px 0px 20px 3px var(--secondary)' : ''};
 
-  @media (min-width: 768px) {
-    max-width: fit-content;
+  @media ${MEDIA_MIN_TABLET} {
+    margin: 15px auto 45px;
     padding: 25px;
-    margin: 25px;
   }
 
   &:active,
@@ -68,12 +68,8 @@ const StyledImageWrapper = styled.div`
   background: var(--white);
 
   img {
-    max-width: 50%;
+    max-width: 100%;
     height: auto;
-
-    @media (min-width: 768px) {
-      max-width: 75%;
-    }
   }
 `;
 
@@ -90,9 +86,9 @@ const StyledTitle = styled.h5`
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
-  padding: 0 10px;
-  min-height: 32px;
+  padding: 0 5px;
+  height: 48px;
 `;

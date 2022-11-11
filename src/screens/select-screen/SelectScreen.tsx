@@ -51,24 +51,25 @@ const SelectScreen = () => {
 
   // console.log(partsArray)
 
-  console.log(selectedCard);
   return (
     <StyledWrapper>
-      {minifigs.length > 0 && (
-        <Splide options={sliderOptions}>
-          {minifigs.map(({ name, set_num, set_img_url }, i) => (
-            <SplideSlide key={set_num}>
-              <CustomCard
-                image={set_img_url}
-                title={name}
-                isActive={i === selectedCard}
-                details={minifigs}
-                onClick={() => setSelectedCard(i)}
-              />
-            </SplideSlide>
-          ))}
-        </Splide>
-      )}
+      <StyledSliderWrapper>
+        {minifigs.length > 0 && (
+          <Splide options={sliderOptions}>
+            {minifigs.map(({ name, set_num, set_img_url }, i) => (
+              <SplideSlide key={set_num}>
+                <CustomCard
+                  image={set_img_url}
+                  title={name}
+                  isActive={i === selectedCard}
+                  details={minifigs}
+                  onClick={() => setSelectedCard(i)}
+                />
+              </SplideSlide>
+            ))}
+          </Splide>
+        )}
+      </StyledSliderWrapper>
       <CustomButton to="/summary" textTransform="uppercase">
         proceed to shipment
       </CustomButton>
@@ -78,10 +79,16 @@ const SelectScreen = () => {
 
 export default SelectScreen;
 
+const StyledSliderWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const StyledWrapper = styled.div`
-  /* gap: 20px; */
   width: 100%;
 `;
+
 const sliderOptions = {
   drag: false,
   arrows: false,
