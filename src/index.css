@@ -1,0 +1,24 @@
+:root {
+  --primary: #018dec;
+  --primary-hover: #004676;
+  --secondary: #ea8029;
+  --white: #fffdfa;
+  --black: #070606;
+}
+
+body {
+  background-image: url('https://img.freepik.com/premium-photo/hologram-question-mark-dark-blue-background_486333-1662.jpg?w=900');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  max-width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  font-family: 'Milky Boba', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: 5px;
+}
