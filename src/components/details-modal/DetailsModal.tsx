@@ -1,23 +1,18 @@
-import { FC, ReactNode, useState } from 'react'
-import Modal from 'react-modal'
-import styled from 'styled-components'
-import { Result } from '../../screens/select-screen/SelectScreen'
+import { FC, ReactNode, useState } from 'react';
+import Modal from 'react-modal';
+import styled from 'styled-components';
+import { Result } from '../../screens/select-screen/SelectScreen';
 
 type Props = {
-  children: ReactNode
-  details?: Result[]
-}
+  children: ReactNode;
+  details?: Result[];
+};
 
 const DetailsModal: FC<Props> = ({ children, details }) => {
-  const [modalIsOpen, setIsOpen] = useState(false)
+  const [modalIsOpen, setIsOpen] = useState(false);
 
-  function openModal() {
-    setIsOpen(true)
-  }
-
-  function closeModal() {
-    setIsOpen(false)
-  }
+  const openModal = () => setIsOpen(true);
+  const closeModal = () => setIsOpen(false);
 
   return (
     <>
@@ -32,16 +27,21 @@ const DetailsModal: FC<Props> = ({ children, details }) => {
         ))}
       </Modal>
     </>
-  )
-}
+  );
+};
 
-export default DetailsModal
+export default DetailsModal;
 
 const StyledTitle = styled.p`
-  &:hover {
+  color: var(--secondary);
+  transition: color 0.2s ease-in-out;
+
+  &:hover,
+  &:active {
     cursor: pointer;
+    color: var(--secondary-hover);
   }
-`
+`;
 
 const customStyles = {
   content: {
@@ -52,4 +52,4 @@ const customStyles = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
   },
-}
+};

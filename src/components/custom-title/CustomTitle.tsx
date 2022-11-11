@@ -1,31 +1,31 @@
-import React, { FC, ReactNode } from 'react'
-import styled from 'styled-components'
+import React, { FC, ReactNode } from 'react';
+import styled from 'styled-components';
 
 type Props = {
-  children: ReactNode
-  color?: string
+  children: ReactNode;
+  color?: string;
   textTransform?:
     | 'none'
     | 'capitalize'
     | 'uppercase'
     | 'lowercase'
     | 'initial'
-    | 'inherit'
-}
+    | 'inherit';
+};
 
 const CustomTitle: FC<Props> = ({ children, color, textTransform }) => {
   return (
     <StyledTitle color={color} textTransform={textTransform}>
       {children}
     </StyledTitle>
-  )
-}
+  );
+};
 
-export default CustomTitle
+export default CustomTitle;
 
 const StyledTitle = styled.h1<{ textTransform: Props['textTransform'] }>`
   text-transform: ${(props) => props.textTransform};
   color: ${(props) => props.color};
   display: flex;
   text-align: center;
-`
+`;

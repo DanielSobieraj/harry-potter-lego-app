@@ -1,16 +1,16 @@
-import { FC, useState } from 'react'
-import styled from 'styled-components'
-import { Result } from '../../screens/select-screen/SelectScreen'
-import CustomLoader from '../custom-loader/CustomLoader'
-import DetailsModal from '../details-modal/DetailsModal'
+import { FC, useState } from 'react';
+import styled from 'styled-components';
+import { Result } from '../../screens/select-screen/SelectScreen';
+import CustomLoader from '../custom-loader/CustomLoader';
+import DetailsModal from '../details-modal/DetailsModal';
 
 type Props = {
-  title: string
-  image: string
-  isActive: boolean
-  details: Result[]
-  onClick: () => void
-}
+  title: string;
+  image: string;
+  isActive: boolean;
+  details: Result[];
+  onClick: () => void;
+};
 
 const CustomCard: FC<Props> = ({
   title,
@@ -19,36 +19,38 @@ const CustomCard: FC<Props> = ({
   details,
   onClick,
 }) => {
-  const [isLoaded, setIsLoaded] = useState(false)
+  const [isLoaded, setIsLoaded] = useState(false);
 
-  const handleLoaded = () => setIsLoaded(true)
+  const handleLoaded = () => setIsLoaded(true);
   return (
     <StyledWrapper onClick={onClick} isActive={isActive}>
       <StyledImageWrapper>
         <img src={image} alt={title} onLoad={handleLoaded} />
         {!isLoaded && <CustomLoader />}
       </StyledImageWrapper>
-      <StyledTitle>{title}</StyledTitle>
-      <DetailsModal details={details}>Details</DetailsModal>
+      <StyledTextWrapper>
+        <StyledTitle>{title}</StyledTitle>
+        <DetailsModal details={details}>Details</DetailsModal>
+      </StyledTextWrapper>
     </StyledWrapper>
-  )
-}
+  );
+};
 
-export default CustomCard
+export default CustomCard;
 
 const StyledWrapper = styled.div<{ isActive: boolean }>`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   background: var(--white);
   border-radius: 15px;
+  margin: 10px;
+  padding: 10px;
   transition: box-shadow 0.2s ease-in-out;
-  padding: 25px;
-  width: 250px;
-  height: 380px;
-  margin: 0 auto;
   box-shadow: ${(props) =>
     props.isActive ? '0px 0px 20px 3px var(--secondary)' : ''};
+
+  @media (min-width: 768px) {
+    padding: 25px;
+    margin: 25px;
+  }
 
   &:active,
   &:hover {
@@ -56,21 +58,35 @@ const StyledWrapper = styled.div<{ isActive: boolean }>`
     -moz-box-shadow: 0px 0px 20px 3px var(--secondary);
     box-shadow: 0px 0px 20px 3px var(--secondary);
   }
-`
+`;
 const StyledImageWrapper = styled.div`
-  inset: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   background: var(--white);
 
   img {
-    width: 250px;
-    height: 250px;
+    max-width: 75%;
+    height: auto;
   }
-`
+`;
+
+const StyledTextWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 
 const StyledTitle = styled.h5`
   font-weight: 700;
-  text-align: justify;
-`
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  padding: 0 10px;
+  min-height: 32px;
+`;

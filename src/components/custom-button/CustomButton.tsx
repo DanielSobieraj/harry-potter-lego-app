@@ -1,18 +1,18 @@
-import { FC, memo } from 'react'
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
+import { FC, memo } from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 type Props = {
-  children: string
-  to: string
+  children: string;
+  to: string;
   textTransform?:
     | 'none'
     | 'capitalize'
     | 'uppercase'
     | 'lowercase'
     | 'initial'
-    | 'inherit'
-}
+    | 'inherit';
+};
 
 const CustomButton: FC<Props> = ({ children, textTransform, to }) => {
   return (
@@ -21,21 +21,21 @@ const CustomButton: FC<Props> = ({ children, textTransform, to }) => {
         <StyledButton textTransform={textTransform}>{children}</StyledButton>
       </StyledLink>
     </StyledWrapper>
-  )
-}
+  );
+};
 
-export default memo(CustomButton)
+export default memo(CustomButton);
 
 const StyledWrapper = styled.div`
   display: flex;
   justify-content: center;
-`
+`;
 
 const StyledButton = styled.button<{ textTransform: Props['textTransform'] }>`
   font-family: 'Milky Boba', sans-serif;
   letter-spacing: 2px;
   text-transform: ${(props) => props.textTransform};
-  padding: 10px 50px 5px;
+  padding: 10px 75px 5px;
   border-radius: 25px;
   border: 1px solid transparent;
   background-color: var(--primary);
@@ -46,7 +46,7 @@ const StyledButton = styled.button<{ textTransform: Props['textTransform'] }>`
     cursor: pointer;
     background-color: var(--primary-hover);
   }
-`
+`;
 
 const StyledLink = styled(Link)`
   text-decoration: none;
@@ -58,4 +58,4 @@ const StyledLink = styled(Link)`
   &:active {
     text-decoration: none;
   }
-`
+`;

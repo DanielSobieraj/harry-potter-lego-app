@@ -1,38 +1,38 @@
-import { Splide, SplideSlide } from '@splidejs/react-splide'
-import '@splidejs/react-splide/css'
-import { useEffect, useState } from 'react'
-import styled from 'styled-components'
-import CustomButton from '../../components/custom-button/CustomButton'
-import CustomCard from '../../components/custom-card/CustomCard'
+import { Splide, SplideSlide } from '@splidejs/react-splide';
+import '@splidejs/react-splide/css';
+import { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import CustomButton from '../../components/custom-button/CustomButton';
+import CustomCard from '../../components/custom-card/CustomCard';
 
 export interface Result {
-  set_num: string
-  name: string
-  num_parts: number
-  set_img_url: string
-  set_url: string
-  last_modified_dt: string
+  set_num: string;
+  name: string;
+  num_parts: number;
+  set_img_url: string;
+  set_url: string;
+  last_modified_dt: string;
 }
 
 const SelectScreen = () => {
-  const [minifigs, setMinifigs] = useState<Result[]>([])
-  const [parts, setParts] = useState<string[]>([])
-  const [partsArray, setPartsArray] = useState<any[]>([])
-  const [selectedCard, setSelectedCard] = useState<number>(-1)
+  const [minifigs, setMinifigs] = useState<Result[]>([]);
+  const [parts, setParts] = useState<string[]>([]);
+  const [partsArray, setPartsArray] = useState<any[]>([]);
+  const [selectedCard, setSelectedCard] = useState<number>(-1);
 
   useEffect(() => {
     const getMinifs = async () => {
       const response = await fetch(
         `https://rebrickable.com/api/v3/lego/minifigs/?page_size=3&in_theme_id=246&key=${process.env.REACT_APP_API_KEY}`
-      ).then((data) => data.json())
-      const minifigs: Result[] = response.results
-      const legoPartsIdsMapped = minifigs.map(({ set_num }) => set_num)
+      ).then((data) => data.json());
+      const minifigs: Result[] = response.results;
+      const legoPartsIdsMapped = minifigs.map(({ set_num }) => set_num);
 
-      setMinifigs(minifigs)
-      setParts(legoPartsIdsMapped)
-    }
-    getMinifs()
-  }, [])
+      setMinifigs(minifigs);
+      setParts(legoPartsIdsMapped);
+    };
+    getMinifs();
+  }, []);
 
   // console.log(parts)
 
@@ -51,7 +51,7 @@ const SelectScreen = () => {
 
   // console.log(partsArray)
 
-  console.log(selectedCard)
+  console.log(selectedCard);
   return (
     <StyledWrapper>
       {minifigs.length > 0 && (
@@ -73,31 +73,31 @@ const SelectScreen = () => {
         proceed to shipment
       </CustomButton>
     </StyledWrapper>
-  )
-}
+  );
+};
 
-export default SelectScreen
+export default SelectScreen;
 
 const StyledWrapper = styled.div`
   /* gap: 20px; */
   width: 100%;
-`
+`;
 const sliderOptions = {
   drag: false,
   arrows: false,
   pagination: false,
   perPage: 3,
-  gap: 30,
+  gap: 35,
   breakpoints: {
-    825: {
+    992: {
       arrows: true,
       drag: true,
       perPage: 2,
       gap: 25,
     },
-    480: {
+    576: {
       perPage: 1,
       gap: 10,
     },
   },
-}
+};
