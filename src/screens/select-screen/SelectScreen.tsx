@@ -1,9 +1,10 @@
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import CustomButton from '../../components/custom-button/CustomButton';
 import CustomCard from '../../components/custom-card/CustomCard';
+import { useOnClickOutside } from '../../utils/hooks/useOnClickOutside';
 
 export interface Result {
   set_num: string;
@@ -20,6 +21,11 @@ const SelectScreen = () => {
   const [partsArray, setPartsArray] = useState<any[]>([]);
   const [selectedCard, setSelectedCard] = useState<number>(-1);
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
+  const ref = useRef(null);
+  useOnClickOutside(ref, () => {
+    setSelectedCard(-1);
+    setIsDisabled(true);
+  });
 
   useEffect(() => {
     const getMinifs = async () => {
@@ -51,7 +57,7 @@ const SelectScreen = () => {
   // }, [parts])
 
   return (
-    <StyledWrapper>
+    <StyledWrapper ref={ref}>
       <StyledSliderWrapper>
         {minifigs.length > 0 && (
           <Splide options={sliderOptions}>

@@ -94,5 +94,6 @@ const customStyles = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
     maxWidth: '75%',
+    borderRadius: '25px',
   },
 };
