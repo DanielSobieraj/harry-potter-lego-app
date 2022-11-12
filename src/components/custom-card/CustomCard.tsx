@@ -1,8 +1,7 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import styled from 'styled-components';
-import { IMG_PLACEHOLDER_URL } from '../../utils/constants/common';
 import { MEDIA_MIN_TABLET } from '../../utils/constants/resolutions';
-import CustomLoader from '../custom-loader/CustomLoader';
+import CustomImage from '../custom-image/CustomImage';
 import DetailsModal from '../details-modal/DetailsModal';
 
 type Props = {
@@ -20,20 +19,9 @@ const CustomCard: FC<Props> = ({
   details,
   onClick,
 }) => {
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  const handleLoaded = () => setIsLoaded(true);
   return (
     <StyledWrapper onClick={onClick} isActive={isActive}>
-      <StyledImageWrapper>
-        <img
-          src={image ? image : IMG_PLACEHOLDER_URL}
-          alt={title}
-          onLoad={handleLoaded}
-          loading="lazy"
-        />
-        {!isLoaded && <CustomLoader />}
-      </StyledImageWrapper>
+      <CustomImage size="large" imageUrl={image} title={title} />
       <StyledTextWrapper>
         <StyledTitle>{title}</StyledTitle>
         <DetailsModal details={details}>Details</DetailsModal>
@@ -66,19 +54,6 @@ const StyledWrapper = styled.div<{ isActive: boolean }>`
     -webkit-box-shadow: 0px 0px 20px 3px var(--secondary);
     -moz-box-shadow: 0px 0px 20px 3px var(--secondary);
     box-shadow: 0px 0px 20px 3px var(--secondary);
-  }
-`;
-const StyledImageWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: var(--white);
-  min-height: 200px;
-
-  img {
-    max-width: 100%;
-    height: auto;
-    max-height: 300px;
   }
 `;
 

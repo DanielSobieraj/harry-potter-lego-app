@@ -2,10 +2,10 @@ import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { getMinifigRequest } from '../../api/apiClient';
-import { IMG_PLACEHOLDER_URL } from '../../utils/constants/common';
 import { MEDIA_MIN_TABLET } from '../../utils/constants/resolutions';
 import { PartsResult, Result } from '../../utils/interfaces';
 import CustomButton from '../custom-button/CustomButton';
+import CustomImage from '../custom-image/CustomImage';
 
 const OrderSummary = () => {
   const [minifigs, setMinifigs] = useState<Result>();
@@ -34,12 +34,10 @@ const OrderSummary = () => {
     <StyledWrapper>
       <h1>Summary</h1>
       <div style={{ textAlign: 'center' }}>
-        <StyledImage
-          src={
-            minifigs?.set_img_url ? minifigs?.set_img_url : IMG_PLACEHOLDER_URL
-          }
-          alt={minifigs?.name}
-          loading="lazy"
+        <CustomImage
+          size="large"
+          title={minifigs?.name}
+          imageUrl={minifigs?.set_img_url}
         />
         <p>{minifigs?.name}</p>
       </div>
@@ -47,11 +45,10 @@ const OrderSummary = () => {
       {partsDetails.map(({ part }) => {
         return (
           <StyledBox key={part.part_num}>
-            <img
-              src={part.part_img_url}
-              alt={part.name}
-              style={{ width: '50px', height: '50px', marginRight: '10px' }}
-              loading="lazy"
+            <CustomImage
+              size="small"
+              title={part.name}
+              imageUrl={part.part_img_url}
             />
             <a href={part.part_url} target="_blank" rel="noreferrer">
               <div>
@@ -90,14 +87,6 @@ const StyledWrapper = styled.div`
     margin-left: 5%;
     width: 50%;
   }
-`;
-
-const StyledImage = styled.img`
-  display: flex;
-  margin: 0 auto;
-  max-width: 100%;
-  height: auto;
-  max-height: 200px;
 `;
 
 const StyledBox = styled.div`

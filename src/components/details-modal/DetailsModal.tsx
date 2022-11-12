@@ -1,6 +1,7 @@
 import { FC, ReactNode, useCallback, useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import styled from 'styled-components';
+import CustomImage from '../custom-image/CustomImage';
 import { Root } from './DetailsModalProps';
 
 type Props = {
@@ -38,10 +39,10 @@ const DetailsModal: FC<Props> = ({ children, details }) => {
         <p>Count: {partsDetails?.count}</p>
         {partsDetails?.results.map(({ part }) => (
           <StyledDetailsBox key={part.part_num}>
-            <img
-              style={{ width: '50px', height: '50px', marginRight: '10px' }}
-              src={part.part_img_url}
-              alt={part.name}
+            <CustomImage
+              size="small"
+              title={part.name}
+              imageUrl={part.part_img_url}
             />
             <a href={part.part_url} target="_blank" rel="noreferrer">
               <div>
