@@ -1,12 +1,13 @@
 import { FC, useState } from 'react';
 import styled from 'styled-components';
+import { IMG_PLACEHOLDER_URL } from '../../utils/constants/common';
 import { MEDIA_MIN_TABLET } from '../../utils/constants/resolutions';
 import CustomLoader from '../custom-loader/CustomLoader';
 import DetailsModal from '../details-modal/DetailsModal';
 
 type Props = {
   title: string;
-  image: string;
+  image: string | null;
   isActive: boolean;
   details: string;
   onClick: () => void;
@@ -19,25 +20,17 @@ const CustomCard: FC<Props> = ({
   details,
   onClick,
 }) => {
-  const [isError, setIsError] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const handleError = () => setIsError(true);
   const handleLoaded = () => setIsLoaded(true);
   return (
     <StyledWrapper onClick={onClick} isActive={isActive}>
       <StyledImageWrapper>
         <img
-          src={
-            isError
-              ? 'https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM='
-              : image
-          }
+          src={image ? image : IMG_PLACEHOLDER_URL}
           alt={title}
           onLoad={handleLoaded}
           loading="lazy"
-          onError={handleError}
-          placeholder="https://asset.conrad.com/media10/isa/160267/c1/-/pl/839820583PI00/image.jpg?x=400&y=400"
         />
         {!isLoaded && <CustomLoader />}
       </StyledImageWrapper>

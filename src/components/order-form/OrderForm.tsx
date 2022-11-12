@@ -1,21 +1,10 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
 import styled from 'styled-components';
-
-interface IFormInput {
-  firstName: string;
-  surname: string;
-  tel: number;
-  email: string;
-  birthday: Date;
-  address: string;
-  city: string;
-  state: string;
-  zipcode: string;
-}
+import { FormProps } from '../../utils/interfaces';
 
 const OrderForm = () => {
-  const { register, handleSubmit } = useForm<IFormInput>();
-  const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
+  const { register, handleSubmit } = useForm<FormProps>();
+  const onSubmit: SubmitHandler<FormProps> = (data) => console.log(data);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

@@ -2,8 +2,9 @@ import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { getMinifigRequest } from '../../api/apiClient';
+import { IMG_PLACEHOLDER_URL } from '../../utils/constants/common';
 import { MEDIA_MIN_TABLET } from '../../utils/constants/resolutions';
-import { Part, PartsResult, Result } from '../../utils/interfaces';
+import { PartsResult, Result } from '../../utils/interfaces';
 import CustomButton from '../custom-button/CustomButton';
 
 const OrderSummary = () => {
@@ -22,21 +23,27 @@ const OrderSummary = () => {
       `https://rebrickable.com/api/v3/lego/minifigs/${figureId}/parts?key=e0c51028c5829d91802ef1224f00a007`
     ).then((data) => data.json());
     setPartsDetails(response.results);
-  }, []);
+  }, [figureId]);
 
   useEffect(() => {
     getMinifs();
     getPartsDetails();
-  }, []);
+  }, [getMinifs, getPartsDetails]);
 
   return (
     <StyledWrapper>
       <h1>Summary</h1>
       <div style={{ textAlign: 'center' }}>
-        <StyledImage src={minifigs?.set_img_url} alt={minifigs?.name} />
+        <StyledImage
+          src={
+            minifigs?.set_img_url ? minifigs?.set_img_url : IMG_PLACEHOLDER_URL
+          }
+          alt={minifigs?.name}
+          loading="lazy"
+        />
         <p>{minifigs?.name}</p>
       </div>
-      <p>There are {minifigs?.num_parts} in this minifig:</p>
+      <p>There are {minifigs?.num_parts} parts in this minifig:</p>
       {partsDetails.map(({ part }) => {
         return (
           <StyledBox key={part.part_num}>
@@ -44,12 +51,12 @@ const OrderSummary = () => {
               src={part.part_img_url}
               alt={part.name}
               style={{ width: '50px', height: '50px', marginRight: '10px' }}
+              loading="lazy"
             />
             <a href={part.part_url} target="_blank" rel="noreferrer">
               <div>
                 <p>{part.name}</p>
                 <p>
-                  Part number:{' '}
                   <StyledPartNumber>{part.part_num}</StyledPartNumber>
                 </p>
               </div>
@@ -57,7 +64,7 @@ const OrderSummary = () => {
           </StyledBox>
         );
       })}
-      <CustomButton to=".." textTransform="uppercase">
+      <CustomButton to=".." textTransform="uppercase" disabled>
         submit
       </CustomButton>
     </StyledWrapper>
@@ -103,8 +110,8 @@ const StyledBox = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
     -webkit-box-orient: vertical;
     padding: 0 5px;
   }

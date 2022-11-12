@@ -24,5 +24,6 @@ const StyledWrapper = styled.div`
 
   @media ${MEDIA_MIN_TABLET} {
     flex-wrap: nowrap;
+    align-items: center;
   }
 `;

@@ -13,13 +13,25 @@ type Props = {
     | 'initial'
     | 'inherit';
   disabled?: boolean;
+  onClick?: () => void;
 };
 
-const CustomButton: FC<Props> = ({ children, textTransform, to, disabled }) => {
+const CustomButton: FC<Props> = ({
+  children,
+  textTransform,
+  to,
+  disabled,
+  onClick,
+}) => {
   return (
     <StyledWrapper>
       <Link to={to}>
-        <StyledButton disabled={disabled} textTransform={textTransform}>
+        <StyledButton
+          disabled={disabled}
+          textTransform={textTransform}
+          type="submit"
+          onClick={onClick}
+        >
           {children}
         </StyledButton>
       </Link>

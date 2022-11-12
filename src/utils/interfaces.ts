@@ -33,3 +33,15 @@ export interface Part {
   part_img_url: string;
   print_of?: string;
 }
+
+export interface FormProps {
+  firstName: string;
+  surname: string;
+  tel: number;
+  email: string;
+  birthday: Date;
+  address: string;
+  city: string;
+  state: string;
+  zipcode: string;
+}
