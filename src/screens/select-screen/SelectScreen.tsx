@@ -2,18 +2,11 @@ import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
+import { getMinifigsRequest } from '../../api/apiClient';
 import CustomButton from '../../components/custom-button/CustomButton';
 import CustomCard from '../../components/custom-card/CustomCard';
 import { useOnClickOutside } from '../../utils/hooks/useOnClickOutside';
-
-export interface Result {
-  set_num: string;
-  name: string;
-  num_parts: number;
-  set_img_url: string;
-  set_url: string;
-  last_modified_dt: string;
-}
+import { Result } from '../../utils/interfaces';
 
 const SelectScreen = () => {
   const [minifigs, setMinifigs] = useState<Result[]>([]);
@@ -29,9 +22,8 @@ const SelectScreen = () => {
 
   useEffect(() => {
     const getMinifs = async () => {
-      const response = await fetch(
-        `https://rebrickable.com/api/v3/lego/minifigs/?page_size=3&in_theme_id=246&key=${process.env.REACT_APP_API_KEY}`
-      ).then((data) => data.json());
+      const response = await getMinifigsRequest();
+
       const minifigs: Result[] = response.results;
       const legoPartsIdsMapped = minifigs.map(({ set_num }) => set_num);
 

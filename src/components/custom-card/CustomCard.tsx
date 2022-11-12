@@ -51,6 +51,7 @@ const StyledWrapper = styled.div<{ isActive: boolean }>`
   @media ${MEDIA_MIN_TABLET} {
     margin: 15px auto 45px;
     padding: 25px;
+    min-height: 200px;
   }
 
   &:active,

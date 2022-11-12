@@ -1,4 +1,4 @@
-import { FC, ReactNode, useEffect, useState } from 'react';
+import { FC, ReactNode, useCallback, useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import styled from 'styled-components';
 import { Root } from './DetailsModalProps';
@@ -15,15 +15,16 @@ const DetailsModal: FC<Props> = ({ children, details }) => {
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
 
-  useEffect(() => {
-    const getPartsDetails = async () => {
-      const response = await fetch(
-        `https://rebrickable.com/api/v3/lego/minifigs/${details}/parts?key=e0c51028c5829d91802ef1224f00a007`
-      ).then((data) => data.json());
-      setPartsDetails(response);
-    };
-    getPartsDetails();
+  const getPartsDetails = useCallback(async () => {
+    const response = await fetch(
+      `https://rebrickable.com/api/v3/lego/minifigs/${details}/parts?key=e0c51028c5829d91802ef1224f00a007`
+    ).then((data) => data.json());
+    setPartsDetails(response);
   }, [details]);
+
+  useEffect(() => {
+    modalIsOpen && getPartsDetails();
+  }, [getPartsDetails, modalIsOpen]);
 
   return (
     <>
@@ -32,24 +33,24 @@ const DetailsModal: FC<Props> = ({ children, details }) => {
         isOpen={modalIsOpen}
         style={customStyles}
         onRequestClose={closeModal}
+        ariaHideApp={false}
       >
-        <div>
-          <p> Count: {partsDetails?.count}</p>
-          <div>
-            {partsDetails?.results.map(({ part }) => (
-              <StyledDetailsBox key={part.part_num}>
-                <img
-                  style={{ width: '50px', height: '50px', marginRight: '10px' }}
-                  src={part.part_img_url}
-                  alt={part.name}
-                />
-                <a href={part.part_url} target="_blank" rel="noreferrer">
-                  <p>{`${part.name} - ${part.part_num}`}</p>
-                </a>
-              </StyledDetailsBox>
-            ))}
-          </div>
-        </div>
+        <p> Count: {partsDetails?.count}</p>
+        {partsDetails?.results.map(({ part }) => (
+          <StyledDetailsBox key={part.part_num}>
+            <img
+              style={{ width: '50px', height: '50px', marginRight: '10px' }}
+              src={part.part_img_url}
+              alt={part.name}
+            />
+            <a href={part.part_url} target="_blank" rel="noreferrer">
+              <div>
+                <p>{part.name}</p>
+                <p>{`Part number: ${part.part_num}`}</p>
+              </div>
+            </a>
+          </StyledDetailsBox>
+        ))}
       </Modal>
     </>
   );

@@ -77,6 +77,7 @@ const StyledInputWrapper = styled.div`
 
   label {
     padding-left: 10px;
+    white-space: nowrap;
   }
 `;
 
