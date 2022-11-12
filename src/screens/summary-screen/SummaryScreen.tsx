@@ -1,9 +1,10 @@
+import { FC } from 'react';
 import styled from 'styled-components';
 import OrderForm from '../../components/order-form/OrderForm';
 import OrderSummary from '../../components/order-summary/OrderSummary';
 import { MEDIA_MIN_TABLET } from '../../utils/constants/resolutions';
 
-const SummaryScreen = () => {
+const SummaryScreen: FC = () => {
   return (
     <StyledWrapper>
       <OrderForm />

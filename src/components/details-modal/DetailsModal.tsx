@@ -35,7 +35,7 @@ const DetailsModal: FC<Props> = ({ children, details }) => {
         onRequestClose={closeModal}
         ariaHideApp={false}
       >
-        <p> Count: {partsDetails?.count}</p>
+        <p>Count: {partsDetails?.count}</p>
         {partsDetails?.results.map(({ part }) => (
           <StyledDetailsBox key={part.part_num}>
             <img
@@ -46,7 +46,10 @@ const DetailsModal: FC<Props> = ({ children, details }) => {
             <a href={part.part_url} target="_blank" rel="noreferrer">
               <div>
                 <p>{part.name}</p>
-                <p>{`Part number: ${part.part_num}`}</p>
+                <p>
+                  Part number:{' '}
+                  <StyledPartNumber>{part.part_num}</StyledPartNumber>
+                </p>
               </div>
             </a>
           </StyledDetailsBox>
@@ -86,15 +89,19 @@ const StyledDetailsBox = styled.div`
   }
 `;
 
+const StyledPartNumber = styled.span`
+  color: var(--secondary);
+`;
+
 const customStyles = {
   content: {
     top: '50%',
     left: '50%',
     right: 'auto',
     bottom: 'auto',
-    marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
     maxWidth: '75%',
     borderRadius: '25px',
+    maxHeight: '-webkit-fill-available',
   },
 };

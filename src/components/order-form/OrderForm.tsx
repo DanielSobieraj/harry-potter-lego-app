@@ -86,7 +86,7 @@ const StyledInput = styled.input`
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
-  border-radius: 25px;
+  border-radius: 15px;
   transition: outline 0.2s ease-in-out;
   border-color: transparent;
 

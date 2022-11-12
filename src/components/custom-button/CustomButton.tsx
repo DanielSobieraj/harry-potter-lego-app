@@ -32,7 +32,7 @@ export default memo(CustomButton);
 const StyledWrapper = styled.div`
   display: flex;
   justify-content: center;
-  margin: 0 10px;
+  margin: 20px 10px;
 `;
 
 const StyledButton = styled.button<{ textTransform: Props['textTransform'] }>`

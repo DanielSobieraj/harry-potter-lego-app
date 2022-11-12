@@ -1,6 +1,6 @@
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { getMinifigsRequest } from '../../api/apiClient';
 import CustomButton from '../../components/custom-button/CustomButton';
@@ -10,58 +10,38 @@ import { Result } from '../../utils/interfaces';
 
 const SelectScreen = () => {
   const [minifigs, setMinifigs] = useState<Result[]>([]);
-  const [parts, setParts] = useState<string[]>([]);
-  const [partsArray, setPartsArray] = useState<any[]>([]);
-  const [selectedCard, setSelectedCard] = useState<number>(-1);
+  const [selectedCard, setSelectedCard] = useState<string>('');
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
+
   const ref = useRef(null);
   useOnClickOutside(ref, () => {
-    setSelectedCard(-1);
+    setSelectedCard('');
     setIsDisabled(true);
   });
 
-  useEffect(() => {
-    const getMinifs = async () => {
-      const response = await getMinifigsRequest();
-
-      const minifigs: Result[] = response.results;
-      const legoPartsIdsMapped = minifigs.map(({ set_num }) => set_num);
-
-      setMinifigs(minifigs);
-      setParts(legoPartsIdsMapped);
-    };
-    getMinifs();
+  const getMinifs = useCallback(async () => {
+    const response = await getMinifigsRequest();
+    setMinifigs(response.results);
   }, []);
 
-  // console.log(parts)
-
-  // useEffect(() => {
-  //   const getParts = async () => {
-  //     const promises = parts.map((data) =>
-  //       fetch(
-  //         `https://rebrickable.com/api/v3/lego/minifigs/${data}/parts?key=e0c51028c5829d91802ef1224f00a007`
-  //       ).then((data) => data.json())
-  //     )
-  //     const result = await Promise.all(promises)
-  //     setPartsArray(result)
-  //   }
-  //   getParts()
-  // }, [parts])
+  useEffect(() => {
+    getMinifs();
+  }, [getMinifs]);
 
   return (
     <StyledWrapper ref={ref}>
       <StyledSliderWrapper>
         {minifigs.length > 0 && (
           <Splide options={sliderOptions}>
-            {minifigs.map(({ name, set_num, set_img_url }, i) => (
+            {minifigs.map(({ name, set_num, set_img_url }) => (
               <SplideSlide key={set_num}>
                 <CustomCard
                   image={set_img_url}
                   title={name}
-                  isActive={i === selectedCard}
+                  isActive={set_num === selectedCard}
                   details={set_num}
                   onClick={() => {
-                    setSelectedCard(i);
+                    setSelectedCard(set_num);
                     setIsDisabled(false);
                   }}
                 />
@@ -72,7 +52,7 @@ const SelectScreen = () => {
       </StyledSliderWrapper>
       <CustomButton
         disabled={isDisabled}
-        to="/summary"
+        to={`/summary/${selectedCard}`}
         textTransform="uppercase"
       >
         proceed to shipment
