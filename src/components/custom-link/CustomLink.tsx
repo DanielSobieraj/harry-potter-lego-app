@@ -1,6 +1,7 @@
 import { FC, memo } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { MEDIA_MIN_TABLET } from '../../utils/constants/resolutions';
 
 type Props = {
   children: string;
@@ -45,12 +46,16 @@ const StyledLink = styled(Link)<{
   font-weight: bold;
   letter-spacing: 2px;
   text-transform: ${(props) => props.texttransform};
-  padding: 10px 75px;
+  padding: 10px 30px;
   border-radius: 25px;
   border: 1px solid transparent;
   background-color: ${(props) => (props.disabled ? 'grey' : 'var(--primary)')};
   color: var(--white);
   transition: background-color 0.2s ease-in-out;
+
+  @media ${MEDIA_MIN_TABLET} {
+    padding: 10px 75px;
+  }
 
   &:hover {
     cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
