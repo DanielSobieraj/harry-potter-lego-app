@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect } from 'react';
+import { FC, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
@@ -27,10 +27,6 @@ const SummaryScreen: FC = () => {
     },
     [figureId, navigate]
   );
-
-  useEffect(() => {
-    console.log(formState);
-  }, [formState]);
 
   return (
     <StyledWrapper>
