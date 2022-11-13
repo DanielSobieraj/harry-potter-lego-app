@@ -18,7 +18,6 @@ interface Props {
 }
 
 const OrderForm: FC<Props> = ({ onSubmit, register, id, errors }) => {
-  console.log(errors);
   return (
     <form onSubmit={onSubmit} id={id}>
       <StyledWrapper>
