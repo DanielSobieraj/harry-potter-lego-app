@@ -2,7 +2,7 @@ import { FC, ReactNode, useCallback, useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import styled from 'styled-components';
 import { getMinifigPartsDetailsRequest } from '../../api/apiClient';
-import CustomImage from '../custom-image/CustomImage';
+import PartDetails from '../part-details/PartDetails';
 import { PartsResult } from './DetailsModalProps';
 
 type Props = {
@@ -37,20 +37,12 @@ const DetailsModal: FC<Props> = ({ children, figureId }) => {
       >
         {partsDetails.map(({ part }) => (
           <StyledDetailsBox key={part.part_num}>
-            <CustomImage
-              size="small"
-              title={part.name}
-              imageUrl={part.part_img_url}
+            <PartDetails
+              name={part.name}
+              img={part.part_img_url}
+              url={part.part_url}
+              partId={part.part_num}
             />
-            <a href={part.part_url} target="_blank" rel="noreferrer">
-              <div>
-                <p>{part.name}</p>
-                <p>
-                  Part number:{' '}
-                  <StyledPartNumber>{part.part_num}</StyledPartNumber>
-                </p>
-              </div>
-            </a>
           </StyledDetailsBox>
         ))}
       </Modal>
@@ -76,20 +68,6 @@ const StyledDetailsBox = styled.div`
   align-items: center;
   flex-basis: 100%;
   padding: 5px 0;
-
-  p {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    line-clamp: 1;
-    -webkit-box-orient: vertical;
-    padding: 0 5px;
-  }
-`;
-
-const StyledPartNumber = styled.span`
-  color: var(--secondary);
 `;
 
 const customStyles = {

@@ -1,20 +1,21 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import CustomButton from './CustomButton';
+import CustomLink from './CustomLink';
 import { withRouter } from 'storybook-addon-react-router-v6';
 
 export default {
-  title: 'Custom Button',
-  component: CustomButton,
+  title: 'Custom Link',
+  component: CustomLink,
   decorators: [withRouter],
-} as ComponentMeta<typeof CustomButton>;
+} as ComponentMeta<typeof CustomLink>;
 
-const Template: ComponentStory<typeof CustomButton> = (args) => (
-  <CustomButton {...args} />
+const Template: ComponentStory<typeof CustomLink> = (args) => (
+  <CustomLink {...args} />
 );
 
 export const Primary = Template.bind({});
 
 Primary.args = {
   children: 'Button',
+  to: 'select',
   textTransform: 'capitalize',
 };

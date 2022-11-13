@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import styled from 'styled-components';
 import { MEDIA_MIN_TABLET } from '../../utils/constants/resolutions';
 import CustomImage from '../custom-image/CustomImage';
@@ -30,7 +30,7 @@ const CustomCard: FC<Props> = ({
   );
 };
 
-export default CustomCard;
+export default memo(CustomCard);
 
 const StyledWrapper = styled.div<{ isActive: boolean }>`
   background: var(--white);
@@ -55,6 +55,7 @@ const StyledWrapper = styled.div<{ isActive: boolean }>`
     -webkit-box-shadow: 0px 0px 20px 3px var(--secondary);
     -moz-box-shadow: 0px 0px 20px 3px var(--secondary);
     box-shadow: 0px 0px 20px 3px var(--secondary);
+    cursor: pointer;
   }
 `;
 
@@ -66,7 +67,6 @@ const StyledTextWrapper = styled.div`
 `;
 
 const StyledTitle = styled.h5`
-  font-weight: 700;
   text-align: center;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -75,5 +75,5 @@ const StyledTitle = styled.h5`
   line-clamp: 3;
   -webkit-box-orient: vertical;
   padding: 0 5px;
-  height: 46px;
+  height: 50px;
 `;

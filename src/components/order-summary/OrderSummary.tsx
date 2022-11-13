@@ -1,5 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { FC, useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import {
   getMinifigPartsDetailsRequest,
@@ -10,26 +9,30 @@ import { MinifigResult } from '../../utils/interfaces';
 import CustomButton from '../custom-button/CustomButton';
 import CustomImage from '../custom-image/CustomImage';
 import { PartsResult } from '../details-modal/DetailsModalProps';
+import PartDetails from '../part-details/PartDetails';
 
-const OrderSummary = () => {
+interface Props {
+  figureId?: string;
+  disabled?: boolean;
+  formId: string;
+}
+
+const OrderSummary: FC<Props> = ({ figureId, disabled, formId }) => {
   const [minifigs, setMinifigs] = useState<MinifigResult>();
   const [partsDetails, setPartsDetails] = useState<PartsResult[]>([]);
-  const { figureId } = useParams();
 
-  const getMinifs = useCallback(async () => {
-    const response = await getSpecificMinifigRequest(figureId);
-    setMinifigs(response);
-  }, [figureId]);
+  const errorMessage = minifigs?.detail;
 
-  const getPartsDetails = useCallback(async () => {
-    const response = await getMinifigPartsDetailsRequest(figureId);
-    setPartsDetails(response.results);
+  const getSummaryData = useCallback(async () => {
+    const getFigures = await getSpecificMinifigRequest(figureId);
+    const getPartDetails = await getMinifigPartsDetailsRequest(figureId);
+    setMinifigs(getFigures);
+    setPartsDetails(getPartDetails.results);
   }, [figureId]);
 
   useEffect(() => {
-    getMinifs();
-    getPartsDetails();
-  }, [getMinifs, getPartsDetails]);
+    getSummaryData();
+  }, [getSummaryData]);
 
   return (
     <StyledWrapper>
@@ -40,31 +43,29 @@ const OrderSummary = () => {
           title={minifigs?.name}
           imageUrl={minifigs?.set_img_url}
         />
-        <p>{minifigs?.name || minifigs?.detail}</p>
+        <p>{minifigs?.name || errorMessage}</p>
       </div>
-      <p>There are {minifigs?.num_parts ?? 'no'} parts in this minifig:</p>
-      <div>
-        {partsDetails.map(({ part }) => {
-          return (
-            <StyledBox key={part.part_num}>
-              <CustomImage
-                size="small"
-                title={part.name}
-                imageUrl={part.part_img_url}
-              />
-              <a href={part.part_url} target="_blank" rel="noreferrer">
-                <div>
-                  <p>{part.name}</p>
-                  <p>
-                    <StyledPartNumber>{part.part_num}</StyledPartNumber>
-                  </p>
-                </div>
-              </a>
-            </StyledBox>
-          );
-        })}
-      </div>
-      <CustomButton to=".." textTransform="uppercase" disabled>
+      {!errorMessage && (
+        <>
+          <p>There are {minifigs?.num_parts} parts in this minifig:</p>
+          {partsDetails.map(({ part }) => {
+            return (
+              <StyledBox key={part.part_num}>
+                <PartDetails
+                  name={part.name}
+                  img={part.part_img_url}
+                  url={part.part_url}
+                  partId={part.part_num}
+                />
+              </StyledBox>
+            );
+          })}
+        </>
+      )}
+      <CustomButton
+        formId={formId}
+        disabled={disabled || errorMessage ? true : false}
+      >
         submit
       </CustomButton>
     </StyledWrapper>
@@ -74,6 +75,7 @@ const OrderSummary = () => {
 export default OrderSummary;
 
 const StyledWrapper = styled.div`
+  font-weight: bold;
   background: var(--white);
   color: var(--black);
   width: 100%;
@@ -97,18 +99,4 @@ const StyledBox = styled.div`
   align-items: center;
   padding: 5px 0;
   width: 100%;
-
-  p {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    line-clamp: 1;
-    -webkit-box-orient: vertical;
-    padding: 0 5px;
-  }
-`;
-
-const StyledPartNumber = styled.span`
-  color: var(--secondary);
 `;

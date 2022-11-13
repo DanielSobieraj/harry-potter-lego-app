@@ -42,3 +42,10 @@ export const getMinifigPartsDetailsRequest = async (
   }).then((data) => data.json());
   return response;
 };
+
+export const sendSummaryData = async (payload: Object) => {
+  fetch('https://localhost:11111', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  });
+};

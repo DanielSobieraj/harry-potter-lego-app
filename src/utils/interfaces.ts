@@ -15,7 +15,7 @@ export interface MinifigResult {
   detail?: string;
 }
 
-export interface FormProps {
+export interface SummaryFormProps {
   firstName: string;
   surname: string;
   tel: number;
@@ -25,4 +25,9 @@ export interface FormProps {
   city: string;
   state: string;
   zipcode: string;
+}
+
+export interface SummaryRequestData {
+  contactData: SummaryFormProps;
+  figureId: string;
 }

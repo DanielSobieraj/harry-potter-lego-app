@@ -1,9 +1,10 @@
 import { FC, memo } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 type Props = {
   children: string;
-  formId: string;
+  to: string;
   textTransform?:
     | 'none'
     | 'capitalize'
@@ -14,26 +15,17 @@ type Props = {
   disabled?: boolean;
 };
 
-const CustomButton: FC<Props> = ({
-  children,
-  textTransform,
-  formId,
-  disabled,
-}) => {
+const CustomLink: FC<Props> = ({ children, textTransform, to, disabled }) => {
   return (
     <StyledWrapper>
-      <StyledButton
-        disabled={disabled}
-        textTransform={textTransform}
-        form={formId}
-      >
+      <StyledLink to={to} disabled={disabled} texttransform={textTransform}>
         {children}
-      </StyledButton>
+      </StyledLink>
     </StyledWrapper>
   );
 };
 
-export default memo(CustomButton);
+export default memo(CustomLink);
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -45,11 +37,14 @@ const StyledWrapper = styled.div`
   }
 `;
 
-const StyledButton = styled.button<{ textTransform: Props['textTransform'] }>`
+const StyledLink = styled(Link)<{
+  texttransform: Props['textTransform'];
+  disabled: Props['disabled'];
+}>`
   font-family: 'K26PrimrosePeach', sans-serif;
   font-weight: bold;
   letter-spacing: 2px;
-  text-transform: ${(props) => props.textTransform};
+  text-transform: ${(props) => props.texttransform};
   padding: 10px 75px;
   border-radius: 25px;
   border: 1px solid transparent;

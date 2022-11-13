@@ -3,8 +3,8 @@ import '@splidejs/react-splide/css';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { getRandomMinifigsRequest } from '../../api/apiClient';
-import CustomButton from '../../components/custom-button/CustomButton';
 import CustomCard from '../../components/custom-card/CustomCard';
+import CustomLink from '../../components/custom-link/CustomLink';
 import { useOnClickOutside } from '../../utils/hooks/useOnClickOutside';
 import { MinifigResult } from '../../utils/interfaces';
 
@@ -50,13 +50,13 @@ const SelectScreen = () => {
           </Splide>
         )}
       </StyledSliderWrapper>
-      <CustomButton
+      <CustomLink
         disabled={isDisabled}
         to={`/summary/${selectedCard}`}
         textTransform="uppercase"
       >
         proceed to shipment
-      </CustomButton>
+      </CustomLink>
     </StyledWrapper>
   );
 };

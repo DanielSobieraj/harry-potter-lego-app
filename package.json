@@ -2,7 +2,11 @@
   "name": "harry-potter-lego-app",
   "version": "0.1.0",
   "private": true,
+  "description": "An application to display various LEGO figures from the Harry Potter series, along with a list of the parts they consist of and the ability to send a sample delivery form",
+  "author": "Daniel Sobieraj",
+  "homepage": "http://danielsobieraj.herokuapp.com/",
   "dependencies": {
+    "@hookform/error-message": "^2.0.1",
     "@splidejs/react-splide": "^0.7.12",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",

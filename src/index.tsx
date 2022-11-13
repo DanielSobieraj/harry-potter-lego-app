@@ -1,3 +1,4 @@
+import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import Container from './components/container/Container';
@@ -9,9 +10,11 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-  <BrowserRouter>
-    <Container>
-      <Router />
-    </Container>
-  </BrowserRouter>
+  <React.StrictMode>
+    <BrowserRouter>
+      <Container>
+        <Router />
+      </Container>
+    </BrowserRouter>
+  </React.StrictMode>
 );

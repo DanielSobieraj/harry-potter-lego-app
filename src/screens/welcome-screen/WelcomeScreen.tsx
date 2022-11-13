@@ -1,5 +1,5 @@
-import CustomButton from '../../components/custom-button/CustomButton'
-import CustomTitle from '../../components/custom-title/CustomTitle'
+import CustomLink from '../../components/custom-link/CustomLink';
+import CustomTitle from '../../components/custom-title/CustomTitle';
 
 const WelcomeScreen = () => {
   return (
@@ -7,11 +7,11 @@ const WelcomeScreen = () => {
       <CustomTitle color="white" textTransform="uppercase">
         lego minifigs mystery box
       </CustomTitle>
-      <CustomButton to="/select" textTransform="uppercase">
+      <CustomLink to="/select" textTransform="uppercase">
         let's go!
-      </CustomButton>
+      </CustomLink>
     </div>
-  )
-}
+  );
+};
 
-export default WelcomeScreen
+export default WelcomeScreen;

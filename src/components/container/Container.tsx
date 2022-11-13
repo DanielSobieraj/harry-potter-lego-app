@@ -7,12 +7,12 @@ type Props = {
 };
 
 const Container: FC<Props> = ({ children }) => {
-  return <StyledBackground>{children}</StyledBackground>;
+  return <StyledContainer>{children}</StyledContainer>;
 };
 
 export default Container;
 
-const StyledBackground = styled.div`
+const StyledContainer = styled.div`
   width: 100%;
 
   @media (min-width: 576px) {

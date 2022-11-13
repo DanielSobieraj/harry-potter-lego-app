@@ -5,7 +5,7 @@
 
 > An application to display various LEGO figures from the Harry Potter series, along with a list of the parts they consist of and the ability to send a sample delivery form
 
-### 🏠 [Homepage](http://danielsobieraj.herokuapp.com/)
+### 🏠 [Click to visit LIVE version](http://danielsobieraj.herokuapp.com/)
 
 ## Install
 
@@ -31,7 +31,7 @@ yarn run test
 
 - Website: danielsobieraj.pl
 - Github: [@DanielSobieraj](https://github.com/DanielSobieraj)
-- LinkedIn: [@linkedin.com\/in\/danielsobieraj\/](https://linkedin.com/in/linkedin.com/in/danielsobieraj/)
+- LinkedIn: [@danielsobieraj](https://linkedin.com/in/danielsobieraj/)
 
 ## Show your support
 

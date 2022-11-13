@@ -20,7 +20,8 @@ body {
   background-size: cover;
   background-color: var(--black);
 
-  font-family: 'Milky Boba', sans-serif;
+  font-family: 'K26PrimrosePeach', sans-serif;
+  font-weight: bold;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   letter-spacing: 5px;
@@ -35,10 +36,6 @@ body {
 
 a {
   text-decoration: none;
-  color: var(--black);
-}
-
-a:visited {
   color: var(--black);
 }
 

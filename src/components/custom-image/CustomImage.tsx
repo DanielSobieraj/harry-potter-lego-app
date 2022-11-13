@@ -33,12 +33,12 @@ const SIZE = {
   large: css`
     max-width: 100%;
     height: auto;
-    max-height: 300px;
-    min-height: 200px;
+    max-height: 200px;
+    min-height: 100px;
   `,
   small: css`
-    width: 50px;
-    height: 50px;
+    width: 35px;
+    height: 35px;
     margin-right: 10px;
   `,
 };
