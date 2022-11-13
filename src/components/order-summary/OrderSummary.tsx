@@ -1,27 +1,28 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import { getMinifigRequest } from '../../api/apiClient';
+import {
+  getMinifigPartsDetailsRequest,
+  getSpecificMinifigRequest,
+} from '../../api/apiClient';
 import { MEDIA_MIN_TABLET } from '../../utils/constants/resolutions';
-import { PartsResult, Result } from '../../utils/interfaces';
+import { MinifigResult } from '../../utils/interfaces';
 import CustomButton from '../custom-button/CustomButton';
 import CustomImage from '../custom-image/CustomImage';
+import { PartsResult } from '../details-modal/DetailsModalProps';
 
 const OrderSummary = () => {
-  const [minifigs, setMinifigs] = useState<Result>();
+  const [minifigs, setMinifigs] = useState<MinifigResult>();
   const [partsDetails, setPartsDetails] = useState<PartsResult[]>([]);
-
-  let { figureId } = useParams();
+  const { figureId } = useParams();
 
   const getMinifs = useCallback(async () => {
-    const response = await getMinifigRequest(figureId);
+    const response = await getSpecificMinifigRequest(figureId);
     setMinifigs(response);
-  }, []);
+  }, [figureId]);
 
   const getPartsDetails = useCallback(async () => {
-    const response = await fetch(
-      `https://rebrickable.com/api/v3/lego/minifigs/${figureId}/parts?key=e0c51028c5829d91802ef1224f00a007`
-    ).then((data) => data.json());
+    const response = await getMinifigPartsDetailsRequest(figureId);
     setPartsDetails(response.results);
   }, [figureId]);
 
@@ -39,28 +40,30 @@ const OrderSummary = () => {
           title={minifigs?.name}
           imageUrl={minifigs?.set_img_url}
         />
-        <p>{minifigs?.name}</p>
+        <p>{minifigs?.name || minifigs?.detail}</p>
       </div>
-      <p>There are {minifigs?.num_parts} parts in this minifig:</p>
-      {partsDetails.map(({ part }) => {
-        return (
-          <StyledBox key={part.part_num}>
-            <CustomImage
-              size="small"
-              title={part.name}
-              imageUrl={part.part_img_url}
-            />
-            <a href={part.part_url} target="_blank" rel="noreferrer">
-              <div>
-                <p>{part.name}</p>
-                <p>
-                  <StyledPartNumber>{part.part_num}</StyledPartNumber>
-                </p>
-              </div>
-            </a>
-          </StyledBox>
-        );
-      })}
+      <p>There are {minifigs?.num_parts ?? 'no'} parts in this minifig:</p>
+      <div>
+        {partsDetails.map(({ part }) => {
+          return (
+            <StyledBox key={part.part_num}>
+              <CustomImage
+                size="small"
+                title={part.name}
+                imageUrl={part.part_img_url}
+              />
+              <a href={part.part_url} target="_blank" rel="noreferrer">
+                <div>
+                  <p>{part.name}</p>
+                  <p>
+                    <StyledPartNumber>{part.part_num}</StyledPartNumber>
+                  </p>
+                </div>
+              </a>
+            </StyledBox>
+          );
+        })}
+      </div>
       <CustomButton to=".." textTransform="uppercase" disabled>
         submit
       </CustomButton>

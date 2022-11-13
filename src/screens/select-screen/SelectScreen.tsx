@@ -2,14 +2,14 @@ import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { getMinifigsRequest } from '../../api/apiClient';
+import { getRandomMinifigsRequest } from '../../api/apiClient';
 import CustomButton from '../../components/custom-button/CustomButton';
 import CustomCard from '../../components/custom-card/CustomCard';
 import { useOnClickOutside } from '../../utils/hooks/useOnClickOutside';
-import { Result } from '../../utils/interfaces';
+import { MinifigResult } from '../../utils/interfaces';
 
 const SelectScreen = () => {
-  const [minifigs, setMinifigs] = useState<Result[]>([]);
+  const [minifigs, setMinifigs] = useState<MinifigResult[]>([]);
   const [selectedCard, setSelectedCard] = useState<string>('');
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
 
@@ -20,7 +20,7 @@ const SelectScreen = () => {
   });
 
   const getMinifs = useCallback(async () => {
-    const response = await getMinifigsRequest();
+    const response = await getRandomMinifigsRequest();
     setMinifigs(response.results);
   }, []);
 
@@ -39,7 +39,7 @@ const SelectScreen = () => {
                   image={set_img_url}
                   title={name}
                   isActive={set_num === selectedCard}
-                  details={set_num}
+                  figureId={set_num}
                   onClick={() => {
                     setSelectedCard(set_num);
                     setIsDisabled(false);

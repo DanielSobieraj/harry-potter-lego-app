@@ -6,11 +6,11 @@ type Props = {
   children?: ReactNode;
 };
 
-const BackgroundWrapper: FC<Props> = ({ children }) => {
+const Container: FC<Props> = ({ children }) => {
   return <StyledBackground>{children}</StyledBackground>;
 };
 
-export default BackgroundWrapper;
+export default Container;
 
 const StyledBackground = styled.div`
   width: 100%;

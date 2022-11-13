@@ -1,11 +1,11 @@
-export interface Root {
+export interface PartsRoot {
   count: number;
   next: any;
   previous: any;
-  results: Result[];
+  results: PartsResult[];
 }
 
-export interface Result {
+export interface PartsResult {
   id: number;
   inv_part_id: number;
   part: Part;

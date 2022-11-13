@@ -45,6 +45,10 @@ const StyledWrapper = styled.div`
   display: flex;
   justify-content: center;
   margin: 20px 10px;
+
+  a {
+    opacity: 1;
+  }
 `;
 
 const StyledButton = styled.button<{ textTransform: Props['textTransform'] }>`

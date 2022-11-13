@@ -8,7 +8,7 @@ type Props = {
   title: string;
   image: string | null;
   isActive: boolean;
-  details: string;
+  figureId: string;
   onClick: () => void;
 };
 
@@ -16,7 +16,7 @@ const CustomCard: FC<Props> = ({
   title,
   image,
   isActive,
-  details,
+  figureId,
   onClick,
 }) => {
   return (
@@ -24,7 +24,7 @@ const CustomCard: FC<Props> = ({
       <CustomImage size="large" imageUrl={image} title={title} />
       <StyledTextWrapper>
         <StyledTitle>{title}</StyledTitle>
-        <DetailsModal details={details}>Details</DetailsModal>
+        <DetailsModal figureId={figureId}>Details</DetailsModal>
       </StyledTextWrapper>
     </StyledWrapper>
   );
@@ -42,6 +42,7 @@ const StyledWrapper = styled.div<{ isActive: boolean }>`
   box-shadow: ${(props) =>
     props.isActive ? '0px 0px 20px 3px var(--secondary)' : ''};
   visibility: ${(props) => (props.onLoad ? 'hidden' : 'visible')};
+  min-height: 50px;
 
   @media ${MEDIA_MIN_TABLET} {
     margin: 15px auto;
@@ -74,5 +75,5 @@ const StyledTitle = styled.h5`
   line-clamp: 3;
   -webkit-box-orient: vertical;
   padding: 0 5px;
-  height: 48px;
+  height: 46px;
 `;

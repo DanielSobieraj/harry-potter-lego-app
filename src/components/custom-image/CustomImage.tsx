@@ -34,6 +34,7 @@ const SIZE = {
     max-width: 100%;
     height: auto;
     max-height: 300px;
+    min-height: 200px;
   `,
   small: css`
     width: 50px;
@@ -47,6 +48,7 @@ const StyledImageWrapper = styled.div`
   justify-content: center;
   align-items: center;
   background: var(--white);
+  min-height: 50px;
 `;
 
 const StyledImg = styled.img<Props>`

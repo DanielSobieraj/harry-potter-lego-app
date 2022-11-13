@@ -1,27 +1,26 @@
 import { FC, ReactNode, useCallback, useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import styled from 'styled-components';
+import { getMinifigPartsDetailsRequest } from '../../api/apiClient';
 import CustomImage from '../custom-image/CustomImage';
-import { Root } from './DetailsModalProps';
+import { PartsResult } from './DetailsModalProps';
 
 type Props = {
   children: ReactNode;
-  details?: string;
+  figureId?: string;
 };
 
-const DetailsModal: FC<Props> = ({ children, details }) => {
-  const [partsDetails, setPartsDetails] = useState<Root>();
+const DetailsModal: FC<Props> = ({ children, figureId }) => {
+  const [partsDetails, setPartsDetails] = useState<PartsResult[]>([]);
   const [modalIsOpen, setIsOpen] = useState(false);
 
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
 
   const getPartsDetails = useCallback(async () => {
-    const response = await fetch(
-      `https://rebrickable.com/api/v3/lego/minifigs/${details}/parts?key=e0c51028c5829d91802ef1224f00a007`
-    ).then((data) => data.json());
-    setPartsDetails(response);
-  }, [details]);
+    const response = await getMinifigPartsDetailsRequest(figureId);
+    setPartsDetails(response.results);
+  }, [figureId]);
 
   useEffect(() => {
     modalIsOpen && getPartsDetails();
@@ -36,8 +35,7 @@ const DetailsModal: FC<Props> = ({ children, details }) => {
         onRequestClose={closeModal}
         ariaHideApp={false}
       >
-        <p>Count: {partsDetails?.count}</p>
-        {partsDetails?.results.map(({ part }) => (
+        {partsDetails.map(({ part }) => (
           <StyledDetailsBox key={part.part_num}>
             <CustomImage
               size="small"
