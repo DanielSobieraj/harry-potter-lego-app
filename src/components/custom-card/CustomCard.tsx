@@ -64,6 +64,7 @@ const StyledTextWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 150px;
 `;
 
 const StyledTitle = styled.h5`
@@ -75,5 +76,4 @@ const StyledTitle = styled.h5`
   line-clamp: 3;
   -webkit-box-orient: vertical;
   padding: 0 5px;
-  height: 50px;
 `;
