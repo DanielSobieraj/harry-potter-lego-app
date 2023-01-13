@@ -3,12 +3,7 @@ import { FC, FormEventHandler } from 'react';
 import { FieldErrorsImpl, UseFormRegister } from 'react-hook-form';
 import styled from 'styled-components';
 import { SummaryFormProps } from '../../utils/interfaces';
-import {
-  CITY_REGEXP,
-  MAIL_REGEXP,
-  PHONE_REGEXP,
-  ZIP_CODE_REGEXP,
-} from '../../utils/regex';
+import { MAIL_REGEXP, PHONE_REGEXP, ZIP_CODE_REGEXP } from '../../utils/regex';
 
 interface Props {
   id: string;
@@ -101,7 +96,6 @@ const OrderForm: FC<Props> = ({ onSubmit, register, id, errors }) => {
           {...register('city', {
             required: { value: true, message: 'City is required' },
             pattern: {
-              value: CITY_REGEXP,
               message: 'City name is invalid',
             },
           })}
@@ -115,7 +109,6 @@ const OrderForm: FC<Props> = ({ onSubmit, register, id, errors }) => {
             {...register('state', {
               required: { value: true, message: 'State is required' },
               pattern: {
-                value: CITY_REGEXP,
                 message: 'State name is invalid',
               },
             })}
