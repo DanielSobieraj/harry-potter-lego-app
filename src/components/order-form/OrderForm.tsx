@@ -95,9 +95,6 @@ const OrderForm: FC<Props> = ({ onSubmit, register, id, errors }) => {
         <StyledInput
           {...register('city', {
             required: { value: true, message: 'City is required' },
-            pattern: {
-              message: 'City name is invalid',
-            },
           })}
         />
         <ErrorMessage errors={errors} name="city" as={StyledErrorMessage} />
@@ -108,9 +105,6 @@ const OrderForm: FC<Props> = ({ onSubmit, register, id, errors }) => {
           <StyledInput
             {...register('state', {
               required: { value: true, message: 'State is required' },
-              pattern: {
-                message: 'State name is invalid',
-              },
             })}
           />
           <ErrorMessage errors={errors} name="state" as={StyledErrorMessage} />
